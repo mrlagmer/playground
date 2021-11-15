@@ -1,30 +1,7 @@
 import { useState } from "react";
 import confetti from "canvas-confetti";
 
-//https://blog.mattclemente.com/2019/07/12/modulus-operator-modulo-operation/
-function findWinner(numkids, s) {
-  let k = [];
-  for (let i = 1; i <= numkids; i++) {
-    k.push(i);
-  }
-  let start = 0;
-  let currInd = 0;
-  while (k.length > 1) {
-    //  if (pos === 0 && start !== 0) {
-    //     kids.splice(pos, 1)
-    //   }
-    //   kids.splice(pos + k -1, 1)
-    //   pos = pos + k - 1
-    //   if (pos >= kids.length) {
-    //       pos = pos - kids.length
-    //   }
-    //  start++
-    currInd = (currInd + s - 1) % k.length;
-    k.splice(currInd, 1);
-    console.log(k);
-  }
-  return k[0];
-}
+import findWinner from "../utils/answer"
 
 export default function Game() {
   const [kids, setKids] = useState(0);
@@ -32,9 +9,6 @@ export default function Game() {
   const [winner, setWinner] = useState(false);
 
   const handleClick = () => {
-    console.log(skip);
-    console.log(kids);
-    console.log(findWinner(Number(kids), Number(skip)));
     setWinner(findWinner(Number(kids), Number(skip)));
     confetti.create(document.getElementById("canvas"), {
       resize: true,
